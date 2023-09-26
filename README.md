@@ -1,13 +1,12 @@
 
 ## Transport Order Data Generation
 
-**Introduction**
+### Introduction
 
 The transport order system involves managing orders with different statuses: 'Pending,' 'In Transit,' and 'Delivered.' Changes to these orders are recorded in the transport_order_audit table.
-
 This README provides insights into the data generation process and explains how the provided query was enhanced to ensure more realistic and accurate data.
 
-**Prerequisites**
+### Prerequisites
 
 Before running the query, ensure that:
 
@@ -15,12 +14,7 @@ Before running the query, ensure that:
 - A database named 'interview' has been created. 
 - Transport_order_audit table is created within the 'interview' database. 
 
-
-### Data Generation Logic
-
-#### Description of the characteristics of the table transport_order_audit 
-
-##### Table Structure 
+### Description of the characteristics of the table `transport_order_audit` 
 
 ### Table Structure
 
@@ -36,7 +30,7 @@ Before running the query, ensure that:
 
 ### Constraints
 
-- Primary Key: The primary key constraint is defined on the `id` column, ensuring each record is uniquely identified by its `id`.
+- The primary key constraint is defined on the `id` column, ensuring each record is uniquely identified by its `id`.
 
 ### Indexes
 
@@ -46,7 +40,6 @@ Before running the query, ensure that:
 The `transport_order_audit` table provides a structured and efficient way to track changes and maintain a comprehensive history of transport orders and their modifications.
 
 Referential Integrity: The order_id column establishes a relationship with the main transport_order table to maintain referential integrity.
-
 
 #### Initial Data Generation
 
@@ -65,22 +58,14 @@ Referential Integrity: The order_id column establishes a relationship with the m
 #### Issues identified in the Provided Query
 
 - The initial data generation doesn't ensure that 'Pending' orders with 'I' (Insert) change type are created.
-
 - The change type for updates and deletes is generated randomly for both initial and subsequent records, making it difficult to track the order's history accurately.
-
 - The transport status is generated randomly without considering the order's lifecycle. This could result in illogical status transitions.
-
 - The change timestamps are randomly generated, which can lead to unrealistic and inconsistent date values.
 
 
 #### Changes Made to the Provided Query
 
 - 'Pending' orders with 'I' change type are created initially.
-
 - Some 'Pending' orders are updated to 'D' (Delete) with a controlled probability (e.g., 10%) and maintain 'I' (Insert) change type for the rest, which accurately represents changes.
-
 - Control the status transitions, starting with 'Pending' and moving to 'In Transit' and 'Delivered' sequentially, ensuring a logical order.
-
 - Generate timestamps based on the current timestamp with some random adjustments, creating more realistic and consistent date values.
-
-
