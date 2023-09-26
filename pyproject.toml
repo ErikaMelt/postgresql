@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "alpega"
+version = "1.0"
+description = "environment created for interviews"
+authors = ["eomac <104458004+ErikaMelt@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+psycopg2-binary = "^2.9.7"
+pydantic = "^2.3.0"
+sqlalchemy = "^2.0.21"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
