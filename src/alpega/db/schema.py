@@ -4,20 +4,6 @@ from sqlalchemy.sql import text
 
 Base = declarative_base()
 
-
-class TransportOrder(Base):
-    __tablename__ = "transport_order"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    customer_id = Column(Integer)
-    origin = Column(String(100))
-    destination = Column(String(100))
-    transport_status = Column(
-        Enum("Pending", "In Transit", "Delivered", name="transport_status_enum"),
-        nullable=False,
-    )
-
-
 class TransportOrderAudit(Base):
     __tablename__ = "transport_order_audit"
 
