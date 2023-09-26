@@ -41,31 +41,23 @@ The `transport_order_audit` table provides a structured and efficient way to tra
 
 Referential Integrity: The order_id column establishes a relationship with the main transport_order table to maintain referential integrity.
 
-#### Initial Data Generation
-
-- Initial records are generated for orders with a 'Pending' status and 'I' (Insert) change type.
-- Customer IDs, origins, destinations, change timestamps, and other data are generated randomly.
-- A controlled percentage of orders (e.g., 10%) are updated to 'D' (Delete) change type.  The assumption is that only an order with status 'Pending' can be deleted. 
-- Change timestamps are calculated based on the current timestamp for insertions and random days in the past for historical changes.
-
-#### Subsequent Data Generation
-
-- Subsequent data records are generated for 'Pending' orders with 'I' change type, simulating updates.
-- Orders progress from 'Pending' to 'In Transit' to 'Delivered' with realistic change timestamps.
-- Randomized factors add variability to the data for realism.
-
 
 #### Issues identified in the Provided Query
 
-- The initial data generation doesn't ensure that 'Pending' orders with 'I' (Insert) change type are created.
+- The initial data generation doesn't ensure that `Pending` orders with `I` (Insert) change type are created.
 - The change type for updates and deletes is generated randomly for both initial and subsequent records, making it difficult to track the order's history accurately.
 - The transport status is generated randomly without considering the order's lifecycle. This could result in illogical status transitions.
 - The change timestamps are randomly generated, which can lead to unrealistic and inconsistent date values.
+  
+### Initial Data Generation
 
+- Initial records are generated for orders with a `Pending` status and `I` (Insert) change type.
+- Customer IDs, origins, destinations, change timestamps, and other data are generated randomly.
+- A controlled probability of orders (e.g., 10%) are updated to `D` (Delete) change type.  The assumption is that only an order with status 'Pending' can be deleted. 
+- Change timestamps are calculated based on the current timestamp for insertions and random days in the past for historical changes.
 
-#### Changes Made to the Provided Query
+### Subsequent Data Generation
 
-- 'Pending' orders with 'I' change type are created initially.
-- Some 'Pending' orders are updated to 'D' (Delete) with a controlled probability (e.g., 10%) and maintain 'I' (Insert) change type for the rest, which accurately represents changes.
-- Control the status transitions, starting with 'Pending' and moving to 'In Transit' and 'Delivered' sequentially, ensuring a logical order.
-- Generate timestamps based on the current timestamp with some random adjustments, creating more realistic and consistent date values.
+- Subsequent data records are generated for `Pending` orders with `I` change type, simulating updates.
+- Orders progress from 'Pending' to 'In Transit' to 'Delivered' with realistic change timestamps.
+- Randomized factors add variability to the data for realism.
